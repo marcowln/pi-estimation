@@ -1,0 +1,5 @@
+{
+  "name": "Monte Carlo Pi Estimation",
+  "description": "An interactive web application that visually demonstrates the estimation of Pi using the Monte Carlo method. Users can add random points to a square containing a circle and observe how the ratio of points inside the circle approximates Pi.",
+  "requestFramePermissions": []
+}
