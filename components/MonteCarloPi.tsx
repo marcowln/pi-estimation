@@ -72,7 +72,6 @@ const MonteCarloPi: React.FC = () => {
 
         {/* Info and controls on the right */}
         <div className="md:col-span-2 flex flex-col gap-3">
-          <Explanation />
           <Stats
             totalPoints={totalPoints}
             pointsInside={pointsInsideCount}
@@ -105,6 +104,7 @@ const MonteCarloPi: React.FC = () => {
               Reset Simulation
             </button>
           </div>
+          <Explanation />
         </div>
       </div>
       {history.length > 0 && <HistoryChart data={history} />}
