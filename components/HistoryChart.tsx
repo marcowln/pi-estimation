@@ -10,9 +10,9 @@ interface HistoryChartProps {
 }
 
 const HistoryChart: React.FC<HistoryChartProps> = ({ data }) => {
-  const padding = { top: 20, right: 30, bottom: 40, left: 50 };
+  const padding = { top: 10, right: 30, bottom: 30, left: 45 };
   const width = 800;
-  const height = 300;
+  const height = 250;
 
   if (data.length === 0) {
     return null;
@@ -37,7 +37,7 @@ const HistoryChart: React.FC<HistoryChartProps> = ({ data }) => {
   const piY = yScale(Math.PI);
 
   return (
-    <div className="bg-gray-800/50 border border-gray-700 rounded-2xl p-4 mt-6 animate-fade-in">
+    <div className="bg-gray-800/50 border border-gray-700 rounded-2xl p-3 mt-4 animate-fade-in">
        <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }
@@ -63,19 +63,19 @@ const HistoryChart: React.FC<HistoryChartProps> = ({ data }) => {
             to { transform: scale(1); opacity: 1; }
         }
        `}</style>
-      <h2 className="text-lg font-bold text-white mb-4 text-center">Estimation History</h2>
+      <h2 className="text-base font-bold text-white mb-2 text-center">Estimation History</h2>
       <svg viewBox={`0 0 ${width} ${height}`} className="w-full h-auto">
         {/* Y Axis Grid Lines */}
         {[3, 3.25, 3.5, 3.75].map(y => (
           <g key={y}>
             <line x1={padding.left} x2={width - padding.right} y1={yScale(y)} y2={yScale(y)} stroke="#374151" strokeWidth="1" />
-            <text x={padding.left - 8} y={yScale(y)} dy="0.32em" fill="#6b7280" fontSize="12" textAnchor="end">{y}</text>
+            <text x={padding.left - 8} y={yScale(y)} dy="0.32em" fill="#6b7280" fontSize="11" textAnchor="end">{y}</text>
           </g>
         ))}
 
         {/* X Axis labels */}
-        <text x={padding.left} y={height-15} fill="#6b7280" fontSize="12" textAnchor="start">0</text>
-        <text x={width - padding.right} y={height-15} fill="#6b7280" fontSize="12" textAnchor="end">{maxX.toLocaleString()} points</text>
+        <text x={padding.left} y={height-10} fill="#6b7280" fontSize="11" textAnchor="start">0</text>
+        <text x={width - padding.right} y={height-10} fill="#6b7280" fontSize="11" textAnchor="end">{maxX.toLocaleString()} points</text>
 
         {/* Actual Pi Line */}
         <g>
@@ -88,7 +88,7 @@ const HistoryChart: React.FC<HistoryChartProps> = ({ data }) => {
             strokeWidth="2"
             strokeDasharray="4"
           />
-          <text x={width - padding.right} y={piY - 6} fill="#f59e0b" fontSize="12" textAnchor="end">Actual π</text>
+          <text x={width - padding.right} y={piY - 6} fill="#f59e0b" fontSize="11" textAnchor="end">Actual π</text>
         </g>
 
         {/* Estimate Path */}
@@ -100,10 +100,10 @@ const HistoryChart: React.FC<HistoryChartProps> = ({ data }) => {
             key={i}
             cx={xScale(d.points)}
             cy={yScale(d.estimate)}
-            r="4"
+            r="3"
             fill="#06b6d4"
             stroke="#111827"
-            strokeWidth="2"
+            strokeWidth="1.5"
             className="dot-pop-in"
             style={{ animationDelay: `${i * 50}ms` }}
           />

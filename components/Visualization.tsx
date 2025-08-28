@@ -4,33 +4,19 @@ import type { Point } from '../types';
 
 interface VisualizationProps {
   points: Point[];
+  animationDuration?: string;
+  animationTimingFunction?: string;
 }
 
-const PointDot: React.FC<{point: Point}> = ({point}) => {
-    // This component isolates the point rendering and its animation logic.
-    // By using a key on this component, React creates a new instance for each new point,
-    // allowing the animation to run on mount.
-    const colorClass = point.isInside ? 'fill-green-400' : 'fill-red-500';
-
-    return (
-        <circle
-            cx={point.x}
-            cy={point.y}
-            r="0.015"
-            className={`${colorClass} opacity-80 animate-fade-in-scale`}
-        />
-    )
-}
-
-const Visualization: React.FC<VisualizationProps> = ({ points }) => {
+const Visualization: React.FC<VisualizationProps> = ({ 
+  points, 
+  animationDuration = '0.4s', 
+  animationTimingFunction = 'cubic-bezier(0.34, 1.56, 0.64, 1)' 
+}) => {
   return (
     <svg 
         viewBox="-1.1 -1.1 2.2 2.2" 
         className="w-full h-full"
-        style={{
-            // Add custom animation to global scope for use in components
-            animation: `fadeInScale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`,
-        }}
     >
       <defs>
         <style>
@@ -45,8 +31,9 @@ const Visualization: React.FC<VisualizationProps> = ({ points }) => {
                         transform: scale(1);
                     }
                 }
-                .animate-fade-in-scale {
-                    animation: fadeInScale 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+                .point-dot-animation {
+                    animation-name: fadeInScale;
+                    animation-fill-mode: forwards;
                     transform-origin: center;
                 }
             `}
@@ -65,9 +52,22 @@ const Visualization: React.FC<VisualizationProps> = ({ points }) => {
 
       {/* Render Points */}
       <g>
-        {points.map((point) => (
-          <PointDot key={point.id} point={point} />
-        ))}
+        {points.map((point) => {
+            const colorClass = point.isInside ? 'fill-green-400' : 'fill-red-500';
+            return (
+                <circle
+                    key={point.id}
+                    cx={point.x}
+                    cy={point.y}
+                    r="0.015"
+                    className={`${colorClass} opacity-80 point-dot-animation`}
+                    style={{
+                      animationDuration,
+                      animationTimingFunction
+                    }}
+                />
+            );
+        })}
       </g>
     </svg>
   );
