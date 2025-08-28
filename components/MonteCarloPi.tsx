@@ -48,7 +48,7 @@ const MonteCarloPi: React.FC = () => {
       
       setPoints(prev => [...prev, pointsToAdd[index]]);
       
-      const delay = Math.max(5, 500 / count); // Faster animation for more points
+      const delay = Math.max(1, 1000 / count); // Faster animation for more points
       setTimeout(() => addPointSequentially(index + 1), delay);
     };
 
@@ -78,22 +78,30 @@ const MonteCarloPi: React.FC = () => {
             piEstimate={piEstimate}
           />
           <div className="flex flex-col space-y-2">
+            <button
+              onClick={() => handleAddPoints(10)}
+              disabled={isAdding}
+              className="flex items-center justify-center w-full px-4 py-3 text-base bg-cyan-500 text-white font-bold rounded-lg shadow-lg hover:bg-cyan-600 focus:outline-none focus:ring-4 focus:ring-cyan-500 focus:ring-opacity-50 transition-all duration-300 disabled:bg-gray-600 disabled:cursor-not-allowed transform hover:scale-105 disabled:scale-100"
+            >
+              <PlusIcon className="w-5 h-5 mr-2" />
+              Add 10 Points
+            </button>
             <div className="grid grid-cols-2 gap-2">
-              <button
-                onClick={() => handleAddPoints(10)}
-                disabled={isAdding}
-                className="flex items-center justify-center w-full px-4 py-2 text-sm bg-cyan-500 text-white font-bold rounded-lg shadow-lg hover:bg-cyan-600 focus:outline-none focus:ring-4 focus:ring-cyan-500 focus:ring-opacity-50 transition-all duration-300 disabled:bg-gray-600 disabled:cursor-not-allowed transform hover:scale-105 disabled:scale-100"
-              >
-                <PlusIcon className="w-4 h-4 mr-2" />
-                Add 10 Points
-              </button>
               <button
                 onClick={() => handleAddPoints(100)}
                 disabled={isAdding}
-                className="flex items-center justify-center w-full px-4 py-2 text-sm bg-cyan-600 text-white font-bold rounded-lg shadow-lg hover:bg-cyan-700 focus:outline-none focus:ring-4 focus:ring-cyan-600 focus:ring-opacity-50 transition-all duration-300 disabled:bg-gray-600 disabled:cursor-not-allowed transform hover:scale-105 disabled:scale-100"
+                className="flex items-center justify-center w-full px-2 py-2 text-sm bg-cyan-500 text-white font-bold rounded-lg shadow-lg hover:bg-cyan-600 focus:outline-none focus:ring-4 focus:ring-cyan-500 focus:ring-opacity-50 transition-all duration-300 disabled:bg-gray-600 disabled:cursor-not-allowed transform hover:scale-105 disabled:scale-100"
               >
                 <PlusIcon className="w-4 h-4 mr-2" />
-                Add 100 Points
+                Add 100
+              </button>
+              <button
+                onClick={() => handleAddPoints(1000)}
+                disabled={isAdding}
+                className="flex items-center justify-center w-full px-2 py-2 text-sm bg-cyan-500 text-white font-bold rounded-lg shadow-lg hover:bg-cyan-600 focus:outline-none focus:ring-4 focus:ring-cyan-500 focus:ring-opacity-50 transition-all duration-300 disabled:bg-gray-600 disabled:cursor-not-allowed transform hover:scale-105 disabled:scale-100"
+              >
+                <PlusIcon className="w-4 h-4 mr-2" />
+                Add 1000
               </button>
             </div>
             <button
